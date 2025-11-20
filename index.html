@@ -6,6 +6,8 @@
 
     <title>RankSpinnah – Build, Rank, and Share Your Lists</title>
     <link rel="icon" href="assets/img/rankspinnah-appicon-dark.png">
+
+    <!-- Shared global CSS -->
     <link rel="stylesheet" href="https://spinnah.app/assets/css/spinnah.css">
 
     <meta name="description" content="RankSpinnah lets you build, rank, and share your favorite lists across iPhone, iPad, and Mac with a single universal purchase.">
@@ -23,7 +25,7 @@
     <meta name="twitter:description" content="Create lists, reorder them with ease, and share your rankings across iPhone, iPad, and Mac with one universal purchase.">
     <meta name="twitter:image" content="https://rank.spinnah.app/assets/img/hero-rankspinnah.webp">
 
-    <!-- Page-local layout CSS -->
+    <!-- Local layout CSS (unchanged except wrap spacing + hero-block) -->
     <style>
       :root { color-scheme: light dark; }
 
@@ -44,7 +46,7 @@
 
       .wrap {
         max-width: 1040px;
-        margin: calc(4rem - var(--spinnah-nav-height)) auto 5rem;
+        margin: 3rem auto 5rem; /* FIXED: removes huge gap after nav */
         padding: 0 1.5rem;
         text-align: center;
       }
@@ -76,6 +78,12 @@
         border-radius: 24px;
       }
 
+      .hero-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       .hero-img {
         width: 100%;
         max-width: 1200px;
@@ -95,12 +103,6 @@
       .badges img {
         height: 48px;
         display: block;
-      }
-
-      .meta {
-        font-size: 0.9rem;
-        opacity: 0.8;
-        margin-top: 0.5rem;
       }
 
       footer {
@@ -139,13 +141,12 @@
           <span class="spinnah-nav__brand-text">Spinnah</span>
         </a>
 
-        <!-- Desktop center links -->
+        <!-- Desktop links -->
         <div class="spinnah-nav__links spinnah-nav__links--center">
           <a href="https://comic.spinnah.app" class="spinnah-nav__link">ComicSpinnah</a>
           <a href="https://rank.spinnah.app" class="spinnah-nav__link">RankSpinnah</a>
         </div>
 
-        <!-- Desktop right links -->
         <div class="spinnah-nav__links spinnah-nav__links--right">
           <a href="https://spinnah.app/philosophy" class="spinnah-nav__link">Philosophy</a>
           <a href="https://spinnah.app/support" class="spinnah-nav__link">Support</a>
@@ -193,25 +194,30 @@
       </header>
 
       <main>
-        <img
-          src="assets/img/hero-rankspinnah.webp"
-          alt="RankSpinnah on iPhone, iPad, and iMac"
-          class="hero-img"
-          width="2400" height="1400"
-        >
+        <section class="hero-block">
+          <img
+            src="assets/img/hero-rankspinnah.webp"
+            alt="RankSpinnah on iPhone, iPad, and iMac"
+            class="hero-img"
+            width="2400" height="1400"
+          >
 
-        <div class="badges">
-          <a href="https://apple.co/3KdJs7O" target="_blank" rel="noopener noreferrer">
-            <picture>
-              <source srcset="https://spinnah.app/assets/img/Download_on_the_App_Store_Badge_US-UK_RGB_wht_092917.svg"
-                      media="(prefers-color-scheme: dark)">
-              <source srcset="https://spinnah.app/assets/img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-                      media="(prefers-color-scheme: light)">
-              <img src="https://spinnah.app/assets/img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-                   alt="Download RankSpinnah on the App Store">
-            </picture>
-          </a>
-        </div>
+          <div class="badges">
+            <a href="https://apple.co/3KdJs7O" target="_blank" rel="noopener noreferrer">
+              <picture>
+                <!-- Dark mode -->
+                <source srcset="https://spinnah.app/assets/img/Download_on_the_App_Store_Badge_US-UK_RGB_wht_092917.svg"
+                        media="(prefers-color-scheme: dark)">
+                <!-- Light mode -->
+                <source srcset="https://spinnah.app/assets/img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+                        media="(prefers-color-scheme: light)">
+                <img
+                  src="https://spinnah.app/assets/img/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+                  alt="Download RankSpinnah on the App Store">
+              </picture>
+            </a>
+          </div>
+        </section>
       </main>
 
       <footer>
@@ -242,7 +248,7 @@
           else menu.setAttribute('hidden', '');
         });
 
-        // Transparent -> solid on scroll
+        // Transparent → solid nav on scroll
         const scrollThreshold = 40;
         const updateNav = () => {
           if (window.scrollY > scrollThreshold) {
